@@ -1,6 +1,11 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const User = require('../models/User.js');
+
+exports.getAll = async (req, res) => {
+  const users = await User.findAll();
+  res.json(users);
+}
 
 exports.register = async ({ usuario, password }) => {
   try {
@@ -12,7 +17,7 @@ exports.register = async ({ usuario, password }) => {
     const hash = await bcrypt.hash(password, 10);
     await User.create({ usuario, password: hash });
 
-    return { status: 200, data: { mensaje: 'Registro exitoso' } };
+    return { status: 200, data: { mensaje: 'Registro exitosaaao' } };
   } catch (error) {
     console.error('Error al registrar:', error);
     return { status: 500, data: { error: 'Error interno al registrar' } };
